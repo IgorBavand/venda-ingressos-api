@@ -5,7 +5,7 @@ import com.igorbavand.vendasapi.modulos.cliente.dto.ClienteResponse;
 import com.igorbavand.vendasapi.modulos.cliente.mapper.ClienteMapper;
 import com.igorbavand.vendasapi.modulos.cliente.model.Cliente;
 import com.igorbavand.vendasapi.modulos.cliente.repository.ClienteRepository;
-import com.igorbavand.vendasapi.modulos.ingresso.model.Ingresso;
+import com.igorbavand.vendasapi.modulos.comum.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +22,8 @@ public class ClienteService {
     }
 
     public Cliente findById(Integer id) {
-        return repository.findById(id).get();
+        return repository.findById(id).orElseThrow(
+                () -> new NotFoundException("Cliente não encontrado.")
+        );
     }
-
 }

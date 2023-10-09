@@ -2,6 +2,8 @@ package com.igorbavand.vendasapi.modulos.venda.service;
 
 import com.igorbavand.vendasapi.config.PageRequest;
 import com.igorbavand.vendasapi.modulos.cliente.service.ClienteService;
+import com.igorbavand.vendasapi.modulos.comum.exception.BadRequestException;
+import com.igorbavand.vendasapi.modulos.comum.exception.NotFoundException;
 import com.igorbavand.vendasapi.modulos.ingresso.service.IngressoService;
 import com.igorbavand.vendasapi.modulos.venda.dto.VendaRequest;
 import com.igorbavand.vendasapi.modulos.venda.dto.VendaResponse;
@@ -50,12 +52,14 @@ public class VendaService {
     }
 
     public VendaResponse getVendaById(Integer id) {
-        return mapper.toVendaResponse(repository.findById(id).get());
+        return mapper.toVendaResponse(repository.findById(id).orElseThrow(
+                () -> new NotFoundException("Venda não encontrada.")
+        ));
     }
 
     private void validarQuantidadeIngressosPorCliente(Integer cliente, Integer ingresso) {
         if (repository.countByClienteAndIngresso(cliente, ingresso) >= 2) {
-            throw new RuntimeException("Número de ingressos por cliente esgotado");
+            throw new BadRequestException("Número de ingressos por cliente esgotado");
         }
     }
 
