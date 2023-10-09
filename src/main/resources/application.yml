@@ -1,0 +1,26 @@
+app-config:
+  rabbit:
+    queues:
+      enviar-email:
+        name: enviar-email-queue
+        exchange: enviar-email-exchange
+        key: enviar-email-key
+
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/vendas_api
+    username: root
+    password: 12345678
