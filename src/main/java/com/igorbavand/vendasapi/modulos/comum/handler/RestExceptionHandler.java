@@ -3,6 +3,8 @@ package com.igorbavand.vendasapi.modulos.comum.handler;
 import com.igorbavand.vendasapi.modulos.comum.exception.BadRequestException;
 import com.igorbavand.vendasapi.modulos.comum.exception.ExceptionResponse;
 import com.igorbavand.vendasapi.modulos.comum.exception.NotFoundException;
+import java.lang.reflect.Method;
+import javax.naming.ServiceUnavailableException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.http.HttpStatus;
@@ -13,9 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
-import javax.naming.ServiceUnavailableException;
-import java.lang.reflect.Method;
 
 @Slf4j
 @ControllerAdvice

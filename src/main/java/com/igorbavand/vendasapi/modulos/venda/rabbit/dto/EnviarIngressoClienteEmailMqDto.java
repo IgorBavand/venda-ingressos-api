@@ -1,10 +1,7 @@
 package com.igorbavand.vendasapi.modulos.venda.rabbit.dto;
 
-import lombok.Data;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
+import lombok.Data;
 
 @Data
 public class EnviarIngressoClienteEmailMqDto {

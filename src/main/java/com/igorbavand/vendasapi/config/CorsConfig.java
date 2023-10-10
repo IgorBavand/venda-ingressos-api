@@ -7,12 +7,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class CorsConfig implements WebMvcConfigurer {
 
+    private static final String PERMIT_ALL = "*";
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedMethods("*")
-                .allowedOrigins("*")
-                .allowedHeaders("*")
+                .allowedMethods(PERMIT_ALL)
+                .allowedOrigins(PERMIT_ALL)
+                .allowedHeaders(PERMIT_ALL)
                 .allowCredentials(false)
                 .maxAge(-1);
     }

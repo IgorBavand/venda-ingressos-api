@@ -3,13 +3,12 @@ package com.igorbavand.vendasapi.modulos.venda.model;
 import com.igorbavand.vendasapi.modulos.cliente.model.Cliente;
 import com.igorbavand.vendasapi.modulos.ingresso.model.Ingresso;
 import com.igorbavand.vendasapi.modulos.venda.enums.EStatusVenda;
+import java.time.LocalDateTime;
+import java.util.UUID;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity
 @Data

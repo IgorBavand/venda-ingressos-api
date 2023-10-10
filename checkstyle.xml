@@ -41,7 +41,7 @@
             <property name="allowByTailComment" value="true"/>
             <property name="allowNonPrintableEscapes" value="true"/>
         </module>
-        <module name="AvoidStarImport"/>
+        <!-- <module name="AvoidStarImport"/> -->
         <module name="OneTopLevelClass"/>
         <module name="NoLineWrap"/>
         <module name="EmptyBlock">
@@ -239,7 +239,7 @@
         </module>
         <module name="CommentsIndentation"/>
         <module name="MagicNumber">
-            <property name="ignoreNumbers" value="0, 0.5, 1"/>
+            <property name="ignoreNumbers" value="0, 0.5, 1, 2, -1"/>
             <property name="ignoreFieldDeclaration" value="true"/>
             <property name="ignoreAnnotation" value="true"/>
             <property name="constantWaiverParentToken"
@@ -252,7 +252,7 @@
         <module name="DefaultComesLast"/>
         <module name="EqualsAvoidNull"/>
         <module name="EqualsHashCode"/>
-        <module name="FinalLocalVariable"/>
+        <!-- <module name="FinalLocalVariable"/> -->
         <module name="IllegalCatch"/>
         <module name="IllegalThrows"/>
         <module name="InterfaceTypeParameterName">

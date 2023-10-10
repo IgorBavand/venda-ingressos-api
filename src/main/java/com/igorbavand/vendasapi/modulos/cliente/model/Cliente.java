@@ -1,10 +1,9 @@
 package com.igorbavand.vendasapi.modulos.cliente.model;
 
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 
 @Entity
 @Data
