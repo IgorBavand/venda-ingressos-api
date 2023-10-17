@@ -7,6 +7,7 @@ import lombok.Data;
 public class EnviarIngressoClienteEmailMqDto {
     private String codigoVenda;
     private String nomeCliente;
+    private String emailCliente;
     private String cidadeCliente;
     private String cpfCliente;
     private String descricaoEvento;
