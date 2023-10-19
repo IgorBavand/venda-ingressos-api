@@ -7,8 +7,10 @@ import java.lang.reflect.Method;
 import javax.naming.ServiceUnavailableException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +27,16 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler
     public void handleUncaughtException(Throwable throwable, Method method, Object... objects) {
         log.info("Erro async: " + throwable.getMessage());
         throwable.printStackTrace();
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+                                                                  HttpHeaders headers, HttpStatus status, WebRequest request) {
+        ExceptionResponse exceptionResponse =
+                new ExceptionResponse(String.format("O campo %s %s", ex.getFieldError().getField(),
+                        ex.getFieldError().getDefaultMessage()), ex.getFieldError().toString());
+
+        return new ResponseEntity<>(exceptionResponse,HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(BadRequestException.class)

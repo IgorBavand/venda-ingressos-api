@@ -3,6 +3,7 @@ package com.igorbavand.vendasapi.modulos.cliente.controller;
 import com.igorbavand.vendasapi.modulos.cliente.dto.ClienteRequest;
 import com.igorbavand.vendasapi.modulos.cliente.dto.ClienteResponse;
 import com.igorbavand.vendasapi.modulos.cliente.service.ClienteService;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +19,7 @@ public class ClienteController {
     private final ClienteService service;
 
     @PostMapping
-    public ResponseEntity<ClienteResponse> cadastrar(@RequestBody ClienteRequest clienteRequest) {
+    public ResponseEntity<ClienteResponse> cadastrar(@Valid @RequestBody ClienteRequest clienteRequest) {
         return ResponseEntity.ok().body(service.cadastrar(clienteRequest));
     }
 }
