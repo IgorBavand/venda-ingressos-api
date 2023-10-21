@@ -3,24 +3,23 @@ package com.igorbavand.vendasapi.modulos.comum.handler;
 import com.igorbavand.vendasapi.modulos.comum.exception.BadRequestException;
 import com.igorbavand.vendasapi.modulos.comum.exception.ExceptionResponse;
 import com.igorbavand.vendasapi.modulos.comum.exception.NotFoundException;
-import java.lang.reflect.Method;
-import javax.naming.ServiceUnavailableException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.naming.ServiceUnavailableException;
+import java.lang.reflect.Method;
+
 @Slf4j
-@ControllerAdvice
-@RestController
+@RestControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler
         implements AsyncUncaughtExceptionHandler {
     @Override
