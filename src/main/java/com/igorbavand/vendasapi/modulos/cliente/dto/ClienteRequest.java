@@ -1,10 +1,10 @@
 package com.igorbavand.vendasapi.modulos.cliente.dto;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import lombok.Data;
 import org.hibernate.validator.constraints.br.CPF;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 
 @Data
@@ -13,7 +13,7 @@ public class ClienteRequest {
     @NotEmpty
     private String nome;
 
-    @NotNull
+    @NotEmpty
     @Email
     private String email;
 
