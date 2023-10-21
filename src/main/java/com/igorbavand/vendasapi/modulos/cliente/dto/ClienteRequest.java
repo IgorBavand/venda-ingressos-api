@@ -4,6 +4,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
+import org.hibernate.validator.constraints.br.CPF;
 
 
 @Data
@@ -20,6 +21,7 @@ public class ClienteRequest {
     private String telefone;
 
     @NotEmpty
+    @CPF
     private String cpf;
 
     @NotEmpty
