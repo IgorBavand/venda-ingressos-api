@@ -5,7 +5,7 @@ import com.igorbavand.vendasapi.modulos.cliente.dto.ClienteRequest;
 import com.igorbavand.vendasapi.modulos.cliente.dto.ClienteResponse;
 import com.igorbavand.vendasapi.modulos.cliente.filtros.ClienteFiltros;
 import com.igorbavand.vendasapi.modulos.cliente.service.ClienteService;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
