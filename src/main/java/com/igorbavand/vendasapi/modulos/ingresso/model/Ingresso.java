@@ -32,5 +32,11 @@ public class Ingresso {
 
     @Column(name = "valor")
     private Double valor;
+
+    @Column(name = "product_id")
+    private String productId;
+
+    @Column(name = "price_id")
+    private String priceId;
 }
 

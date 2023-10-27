@@ -10,9 +10,9 @@ app-config:
         exchange: enviar-email-exchange
         key: enviar-email-key
   stripe:
-    secretKey: sk_test_51NgytWGBq9bHOoOQXzc3KZfB5sl5TKFtuzoV8T0PgIsjNXhmFi2IDM3GA4efPOpg7Qsz25tqEpxH4JJmDX5VRGRf00e3gbuaRU
+    secretKey: SUA_SECRET_KEY
   webhook:
-    secretKey: whsec_e0a4512a782eccd198367195c4687fafad2d86937113901a0635b3b91e765846
+    secretKey: SUA_SECRET_KEY
 
 spring:
   jpa:

@@ -31,4 +31,7 @@ public class Cliente {
 
     @Column(name = "cidade")
     private String cidade;
+
+    @Column(name = "customer_id")
+    private String customerId;
 }

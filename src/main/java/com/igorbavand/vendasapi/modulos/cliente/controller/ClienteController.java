@@ -5,6 +5,7 @@ import com.igorbavand.vendasapi.modulos.cliente.dto.ClienteRequest;
 import com.igorbavand.vendasapi.modulos.cliente.dto.ClienteResponse;
 import com.igorbavand.vendasapi.modulos.cliente.filtros.ClienteFiltros;
 import com.igorbavand.vendasapi.modulos.cliente.service.ClienteService;
+import com.stripe.exception.StripeException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -24,7 +25,7 @@ public class ClienteController {
     }
 
     @PostMapping
-    public ResponseEntity<ClienteResponse> cadastrar(@Valid @RequestBody ClienteRequest clienteRequest) {
+    public ResponseEntity<ClienteResponse> cadastrar(@Valid @RequestBody ClienteRequest clienteRequest) throws StripeException {
         return ResponseEntity.ok().body(service.cadastrar(clienteRequest));
     }
 }

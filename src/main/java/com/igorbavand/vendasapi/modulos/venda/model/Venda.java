@@ -39,17 +39,24 @@ public class Venda {
     @Column(name = "codigo_venda")
     private String codigoVenda;
 
+    @Column(name = "session_id")
+    private String sessionId;
+
     @PrePersist
     public void prePersist() {
         dataVenda = LocalDateTime.now();
     }
 
-    public void vendaValidada() {
-        this.statusVenda = EStatusVenda.APROVADA;
+    public void vendaPaga() {
+        this.statusVenda = EStatusVenda.PAGO;
     }
 
-    public void vendaNegada() {
-        this.statusVenda = EStatusVenda.QUANTIDADE_ESGOTADA_PARA_CPF;
+    public void aguardandoPagamento() {
+        this.statusVenda = EStatusVenda.AGUARDANDO_PAGAMENTO;
+    }
+
+    public void vendaNaoAutorizada() {
+        this.statusVenda = EStatusVenda.VENDA_NAO_AUTORIZADA;
     }
 
     public void gerarCodigoVenda() {
