@@ -25,6 +25,15 @@ username: root
 password: 12345678
 ~~~
 
+### Adicione as configurações
+
+Modifique o nome do arquivo `application-example.yml` para `application.yml` 
+Dentro do `application.yml` coloque suas keys do [Stripe](https://stripe.com/br)
+
+Para acessar o wehbook acesse o terminal local e coloque o seguinte comando: `stripe listen --forward-to localhost:8091/api/venda/webhook-listener`
+
+Observação: caso tenha dúvidas de como fazer a configuração do Stripe na máquina, consulte a documentação do próprio Stripe.
+
 Requisições
 ----------
 ~~~
@@ -75,6 +84,7 @@ para cada cliente
 FLUXO
 -------
 Após a venda ser efetuada, os dados serão enviados para uma fila que será consumida por uma API disparadora de emails que enviará o ingresso para o cliente.
+O email será enviado após o pagamento ser realizado pelo cliente.
 
 A API disparadora de emails deve estar sendo executada e consumindo a fila do RabbitMQ.
 link da API: [disparador-emails](https://github.com/IgorBavand/disparador-emails-api)
