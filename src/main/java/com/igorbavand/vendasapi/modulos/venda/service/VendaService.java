@@ -167,14 +167,15 @@ public class VendaService {
                 );
 
                 if (statusPagamento.equalsIgnoreCase(STATUS_PAGAMENTO_PAGO)) {
-                    enviarEmailComIngresso(venda);
                     venda.vendaPaga();
+                    enviarEmailComIngresso(venda);
+                    repository.save(venda);
                 } else {
-                    venda.vendaNaoAutorizada();;
+                    venda.vendaNaoAutorizada();
+                    repository.save(venda);
                     throw new BadRequestException("Pagamento não finalizado.");
                 }
 
-                repository.save(venda);
             } catch (Exception e) {
                 e.printStackTrace();
             }
