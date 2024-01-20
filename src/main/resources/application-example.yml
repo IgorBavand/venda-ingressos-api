@@ -2,6 +2,8 @@ server:
   port: 8091
 
 app-config:
+  name: vendas-api
+  version: 1.0.0
   url: http://localhost:8091
   rabbit:
     queues:
@@ -31,3 +33,8 @@ spring:
     url: jdbc:mysql://localhost:3306/vendas_api
     username: root
     password: 12345678
+
+api:
+  security:
+    token:
+      secret: ALGUMA_SECRET
