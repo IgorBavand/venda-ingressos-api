@@ -15,7 +15,8 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
-		<checkstyle-maven-plugin.version>3.1.1</checkstyle-maven-plugin.version>
+		<checkstyle-maven-plugin.version>3.3.1</checkstyle-maven-plugin.version>
+		<puppycrawl.checkstyle.version>10.12.6</puppycrawl.checkstyle.version>
 		<querydsl.version>5.0.0</querydsl.version>
 		<mysema.maven.apt.version>1.1.3</mysema.maven.apt.version>
 		<springdoc.version>2.0.2</springdoc.version>
@@ -110,6 +111,22 @@
 			<version>20210307</version> <!-- Use a versão mais recente disponível -->
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.auth0</groupId>
+			<artifactId>java-jwt</artifactId>
+			<version>4.4.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+			<version>4.0.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -131,23 +148,30 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
 				<version>${checkstyle-maven-plugin.version}</version>
+				<dependencies>
+					<dependency>
+						<groupId>com.puppycrawl.tools</groupId>
+						<artifactId>checkstyle</artifactId>
+						<version>${puppycrawl.checkstyle.version}</version>
+					</dependency>
+				</dependencies>
 				<executions>
 					<execution>
-						<id>validate</id>
-						<phase>validate</phase>
-						<configuration>
-							<configLocation>checkstyle.xml</configLocation>
-							<encoding>UTF-8</encoding>
-							<consoleOutput>true</consoleOutput>
-							<failsOnError>false</failsOnError>
-							<failOnViolation>true</failOnViolation>
-							<violationSeverity>warning</violationSeverity>
-						</configuration>
+						<id>verify-style</id>
+						<phase>process-classes</phase>
 						<goals>
 							<goal>check</goal>
 						</goals>
+						<configuration>
+							<consoleOutput>true</consoleOutput>
+							<violationSeverity>warning</violationSeverity>
+						</configuration>
 					</execution>
 				</executions>
+				<configuration>
+					<includeTestSourceDirectory>true</includeTestSourceDirectory>
+					<configLocation>${project.basedir}/checkstyle.xml</configLocation>
+				</configuration>
 			</plugin>
 
 			<!-- Querydsl -->
@@ -185,24 +209,5 @@
 
 		</plugins>
 	</build>
-
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>3.1.1</version>
-				<configuration>
-					<configLocation>${project.basedir}/checkstyle.xml</configLocation>
-					<encoding>UTF-8</encoding>
-					<consoleOutput>true</consoleOutput>
-					<failsOnError>true</failsOnError>
-					<linkXRef>true</linkXRef>
-					<failOnViolation>true</failOnViolation>
-					<enableFilesSummary>true</enableFilesSummary>
-				</configuration>
-			</plugin>
-		</plugins>
-	</reporting>
 
 </project>

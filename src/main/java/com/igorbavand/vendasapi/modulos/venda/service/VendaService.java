@@ -89,18 +89,18 @@ public class VendaService {
         venda.setIngresso(ingresso);
 
         SessionCreateParams params =
-                SessionCreateParams.builder()
-                        .addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD)
-                        .setMode(SessionCreateParams.Mode.PAYMENT)
-                        .setSuccessUrl(url + "/public/ingressos-pagamento/success?success=true")
-                        .setCancelUrl(url + "/public/ingressos-pagamento/cancelled?cancelled=true")
-                        .setCustomer(cliente.getCustomerId())
-                        .addLineItem(
-                                SessionCreateParams.LineItem.builder()
-                                        .setQuantity(UM)
-                                        .setPrice(ingresso.getPriceId())
-                                        .build())
-                        .build();
+            SessionCreateParams.builder()
+                .addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD)
+                .setMode(SessionCreateParams.Mode.PAYMENT)
+                .setSuccessUrl(url + "/public/ingressos-pagamento/success?success=true")
+                .setCancelUrl(url + "/public/ingressos-pagamento/cancelled?cancelled=true")
+                .setCustomer(cliente.getCustomerId())
+                .addLineItem(
+                    SessionCreateParams.LineItem.builder()
+                        .setQuantity(UM)
+                        .setPrice(ingresso.getPriceId())
+                        .build())
+                .build();
         Session session = Session.create(params);
         venda.setSessionId(session.getId());
 
@@ -110,12 +110,12 @@ public class VendaService {
 
     public Page<VendaResponse> getAllVendas(PageRequest pageRequest) {
         return repository.findAll(pageRequest)
-                .map(mapper::toVendaResponse);
+            .map(mapper::toVendaResponse);
     }
 
     public VendaResponse getVendaById(Integer id) {
         return mapper.toVendaResponse(repository.findById(id).orElseThrow(
-                () -> new NotFoundException("Venda não encontrada.")
+            () -> new NotFoundException("Venda não encontrada.")
         ));
     }
 
@@ -140,48 +140,48 @@ public class VendaService {
         }
 
         switch (event.getType()) {
-        case "payment_intent.succeeded":
-            // ...
-            break;
-        case "payment_method.attached":
-            // ...
-            break;
-        case "payment_intent.created":
-            //...
-            break;
-        case "customer.created":
-            // ...
-            break;
-        case "charge.succeeded":
-            // cobrança realizada com sucesso
-            break;
-        case "checkout.session.completed":
-            try {
-                ObjectMapper objectMapper = new ObjectMapper();
-                JsonNode jsonNode = objectMapper.readTree(event.toJson());
-                var csId = jsonNode.get("data").get("object").get("id").asText();
-                var statusPagamento = jsonNode.get("data").get("object").get("payment_status").asText();
+            case "payment_intent.succeeded":
+                // ...
+                break;
+            case "payment_method.attached":
+                // ...
+                break;
+            case "payment_intent.created":
+                //...
+                break;
+            case "customer.created":
+                // ...
+                break;
+            case "charge.succeeded":
+                // cobrança realizada com sucesso
+                break;
+            case "checkout.session.completed":
+                try {
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    JsonNode jsonNode = objectMapper.readTree(event.toJson());
+                    var csId = jsonNode.get("data").get("object").get("id").asText();
+                    var statusPagamento = jsonNode.get("data").get("object").get("payment_status").asText();
 
-                var venda = repository.findBySessionId(csId).orElseThrow(
+                    var venda = repository.findBySessionId(csId).orElseThrow(
                         () -> new NotFoundException("Venda não localizada.")
-                );
+                    );
 
-                if (statusPagamento.equalsIgnoreCase(STATUS_PAGAMENTO_PAGO)) {
-                    venda.vendaPaga();
-                    enviarEmailComIngresso(venda);
-                    repository.save(venda);
-                } else {
-                    venda.vendaNaoAutorizada();
-                    repository.save(venda);
-                    throw new BadRequestException("Pagamento não finalizado.");
+                    if (statusPagamento.equalsIgnoreCase(STATUS_PAGAMENTO_PAGO)) {
+                        venda.vendaPaga();
+                        enviarEmailComIngresso(venda);
+                        repository.save(venda);
+                    } else {
+                        venda.vendaNaoAutorizada();
+                        repository.save(venda);
+                        throw new BadRequestException("Pagamento não finalizado.");
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            break;
-        default:
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+                break;
+            default:
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
         return new ResponseEntity<>("Success", HttpStatus.OK);
     }
