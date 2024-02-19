@@ -28,7 +28,7 @@ public class Ingresso {
     private LocalDate dataEvento;
 
     @Column(name = "data_encerramento_venda")
-    private LocalDate dataEncerramentoVenda;  // AO ENCERRAR A DATA DE VENDAS DEVE SER ENVIADO UM EMAIL COM O RELATORIO DE VENDAS
+    private LocalDate dataEncerramentoVenda;  //TODO -> AO ENCERRAR A DATA DE VENDAS DEVE SER ENVIADO UM EMAIL COM O RELATORIO DE VENDAS
 
     @Column(name = "valor")
     private Double valor;

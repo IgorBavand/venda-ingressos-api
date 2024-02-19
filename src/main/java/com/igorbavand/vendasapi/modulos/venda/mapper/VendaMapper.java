@@ -18,7 +18,7 @@ public interface VendaMapper {
     VendaResponse toVendaResponse(Venda venda);
 
     @Mapping(source = "cliente.nome", target = "nomeCliente")
-    @Mapping(source = "cliente.email", target = "emailCliente")
+    @Mapping(source = "cliente.login", target = "emailCliente")
     @Mapping(source = "cliente.cidade", target = "cidadeCliente")
     @Mapping(source = "cliente.cpf", target = "cpfCliente")
     @Mapping(source = "ingresso.descricao", target = "descricaoEvento")

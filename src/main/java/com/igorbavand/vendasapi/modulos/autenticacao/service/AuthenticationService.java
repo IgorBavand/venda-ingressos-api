@@ -32,7 +32,7 @@ public class AuthenticationService implements UserDetailsService {
 
         if (principal instanceof UserDetails) {
             var user = userService.findByLogin(((UserDetails) principal).getUsername());
-            return new UserResponseDto(user.getId(), user.getUsername(), user.getRole(), user.getCreatedAt(), user.getUpdatedAt());
+            return new UserResponseDto(user.getId(), user.getNome(), user.getUsername(), user.getTelefone(), user.getCpf(), user.getCidade(), user.getRole(), user.getCreatedAt(), user.getUpdatedAt());
         } else {
             throw new NotFoundException("User not found.");
         }

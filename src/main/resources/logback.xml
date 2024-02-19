@@ -1,0 +1,51 @@
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <property name="CONSOLE_LOG_PATTERN"
+              value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}) %yellow(%clr([%t])) %highlight(%clr(${LOG_LEVEL_PATTERN:-%5p})) %magenta(%clr(%logger{1000})){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <pattern>
+                    <pattern>
+                        {
+                        "timestamp_app": "%d{HH:mm:ss.SSS}",
+                        "message": "%message",
+                        "appname": "${appname:-}",
+                        "level": "%level",
+                        "parentId": "%X{parentId-=}",
+                        "traceId": "%X{traceId:-}",
+                        "spanId": "%X{spanId}",
+                        "stack_trace": "%throwable"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+    </appender>
+    <root level="${level}">
+        <appender-ref ref="${appender}"/>
+    </root>
+
+    <springProfile name="test">
+        <root level="ERROR">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+        <logger name="br.com.api.common.client.ApiErrorDecoder" level="OFF"/>
+    </springProfile>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>

@@ -1,17 +1,15 @@
 package com.igorbavand.vendasapi.modulos.cliente.controller;
 
 import com.igorbavand.vendasapi.config.PageRequest;
+import com.igorbavand.vendasapi.modulos.autenticacao.dto.RegisterDto;
+import com.igorbavand.vendasapi.modulos.autenticacao.dto.UserResponseDto;
 import com.igorbavand.vendasapi.modulos.cliente.dto.ClienteRequest;
 import com.igorbavand.vendasapi.modulos.cliente.dto.ClienteResponse;
 import com.igorbavand.vendasapi.modulos.cliente.filtros.ClienteFiltros;
 import com.igorbavand.vendasapi.modulos.cliente.service.ClienteService;
 import com.igorbavand.vendasapi.modulos.comum.annotations.PageRequestSwaggerParameters;
 import com.stripe.exception.StripeException;
-import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -27,12 +25,12 @@ public class ClienteController {
 
     @GetMapping
     @PageRequestSwaggerParameters
-    public Page<ClienteResponse> getAll(@Parameter(hidden = true) PageRequest pageRequest, ClienteFiltros filtros) {
+    public Page<UserResponseDto> getAll(@Parameter(hidden = true) PageRequest pageRequest, ClienteFiltros filtros) {
         return service.getAll(pageRequest, filtros);
     }
 
     @PostMapping
-    public ResponseEntity<ClienteResponse> cadastrar(@Valid @RequestBody ClienteRequest clienteRequest) throws StripeException {
+    public ResponseEntity<UserResponseDto> cadastrar(@Valid @RequestBody RegisterDto clienteRequest) throws StripeException {
         return ResponseEntity.ok().body(service.cadastrar(clienteRequest));
     }
 }

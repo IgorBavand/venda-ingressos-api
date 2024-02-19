@@ -1,10 +1,8 @@
 package com.igorbavand.vendasapi.modulos.autenticacao.model;
 
 import com.igorbavand.vendasapi.modulos.autenticacao.enums.EUserRole;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -12,7 +10,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
@@ -20,6 +17,7 @@ import java.util.List;
 @Table(name = "usuarios")
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
@@ -29,11 +27,26 @@ public class Usuario implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "nome", length = 255)
+    private String nome;
+
     @Column(length = 255)
     private String login;
 
     @Column(length = 255)
     private String password;
+
+    @Column(name = "telefone")
+    private String telefone;
+
+    @Column(name = "cpf")
+    private String cpf;
+
+    @Column(name = "cidade")
+    private String cidade;
+
+    @Column(name = "customer_id")
+    private String customerId;
 
     @Column(length = 255)
     @Enumerated(EnumType.STRING)

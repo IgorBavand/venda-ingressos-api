@@ -1,6 +1,6 @@
 package com.igorbavand.vendasapi.modulos.stripe.service;
 
-import com.igorbavand.vendasapi.modulos.cliente.model.Cliente;
+import com.igorbavand.vendasapi.modulos.autenticacao.model.Usuario;
 import com.igorbavand.vendasapi.modulos.ingresso.dto.IngressoRequest;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
@@ -8,9 +8,9 @@ import com.stripe.model.Customer;
 import com.stripe.model.CustomerSearchResult;
 import com.stripe.model.Price;
 import com.stripe.model.Product;
+import com.stripe.param.CustomerSearchParams;
 import com.stripe.param.PriceCreateParams;
 import com.stripe.param.ProductCreateParams;
-import com.stripe.param.CustomerSearchParams;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -20,18 +20,17 @@ import java.util.Map;
 @Service
 public class StripeService {
 
-    private static final Long MOCK_VALOR_AMOUNT_PRICE = 100L;
     private static final int CEM = 100;
 
     @Value("${app-config.stripe.secretKey}")
     private String stripeSecretKey;
 
-    public Customer registerCustomer(Cliente cliente) throws StripeException {
+    public Customer registerCustomer(Usuario cliente) throws StripeException {
         Stripe.apiKey = stripeSecretKey;
 
         Map<String, Object> params = new HashMap<>();
         params.put("name", cliente.getNome());
-        params.put("email", cliente.getEmail());
+        params.put("email", cliente.getLogin());
 
         return Customer.create(params);
     }

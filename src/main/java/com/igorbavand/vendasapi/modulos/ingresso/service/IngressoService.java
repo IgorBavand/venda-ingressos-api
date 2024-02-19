@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.stripe.Stripe;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class IngressoService {
@@ -36,6 +38,10 @@ public class IngressoService {
 
         repository.save(ingressoBancoDeDados);
         return mapper.toIngressoResponse(ingressoBancoDeDados);
+    }
+
+    public List<IngressoResponse> getAll() {
+        return mapper.toIngressoResponseList(repository.findAll());
     }
 
     public Ingresso findById(Integer id) {
