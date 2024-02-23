@@ -1,6 +1,7 @@
 package com.igorbavand.vendasapi.modulos.ingresso.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,10 +26,10 @@ public class Ingresso {
     private String localEvento;
 
     @Column(name = "data_evento")
-    private LocalDate dataEvento;
+    private LocalDateTime dataEvento;
 
     @Column(name = "data_encerramento_venda")
-    private LocalDate dataEncerramentoVenda;  //TODO -> AO ENCERRAR A DATA DE VENDAS DEVE SER ENVIADO UM EMAIL COM O RELATORIO DE VENDAS
+    private LocalDate dataEncerramentoVenda;
 
     @Column(name = "valor")
     private Double valor;

@@ -2,10 +2,7 @@ package com.igorbavand.vendasapi.modulos.ingresso.predicate;
 
 import com.igorbavand.vendasapi.modulos.ingresso.model.QIngresso;
 import com.querydsl.core.BooleanBuilder;
-import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
-
-import java.time.LocalDate;
 
 public class IngressoPredicate {
 

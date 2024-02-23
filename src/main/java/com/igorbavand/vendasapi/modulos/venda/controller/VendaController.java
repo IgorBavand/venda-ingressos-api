@@ -36,7 +36,9 @@ public class VendaController {
     }
 
     @PostMapping("webhook-listener")
-    public ResponseEntity<String> webhook(@RequestBody String payload, @RequestHeader("Stripe-Signature") String sigHeader) throws Exception {
+    public ResponseEntity<String> webhook(@RequestBody String payload,
+                                          @RequestHeader("Stripe-Signature")
+                                          String sigHeader) throws Exception {
         return service.webhookListener(payload, sigHeader);
     }
 }

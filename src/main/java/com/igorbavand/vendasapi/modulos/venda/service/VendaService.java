@@ -75,6 +75,7 @@ public class VendaService {
         return mapper.toVendaResponse(venda);
     }
 
+    @SuppressWarnings({"checkstyle:methodlength"})
     public String createCheckoutSession(VendaRequest vendaRequest) throws StripeException {
         Stripe.apiKey = stripeSecretKey;
 
@@ -130,12 +131,13 @@ public class VendaService {
         rabbitTemplate.convertAndSend(enviarEmailExchange, enviarEmailKey, informacoesIngresso);
     }
 
+    @SuppressWarnings({"checkstyle:methodlength"})
     public ResponseEntity<String> webhookListener(String payload, String sigHeader) throws Exception {
         Event event = null;
         try {
             event = Webhook.constructEvent(payload, sigHeader, webhookSecretKey);
-        } catch (SignatureVerificationException e) {
-            log.info("Failed signature verification = {}", e);
+        } catch (SignatureVerificationException ex) {
+            log.info("Failed signature verification = {}", ex);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
 
@@ -176,8 +178,8 @@ public class VendaService {
                         throw new BadRequestException("Pagamento não finalizado.");
                     }
 
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
                 break;
             default:

@@ -3,8 +3,6 @@ package com.igorbavand.vendasapi.modulos.cliente.controller;
 import com.igorbavand.vendasapi.config.PageRequest;
 import com.igorbavand.vendasapi.modulos.autenticacao.dto.RegisterDto;
 import com.igorbavand.vendasapi.modulos.autenticacao.dto.UserResponseDto;
-import com.igorbavand.vendasapi.modulos.cliente.dto.ClienteRequest;
-import com.igorbavand.vendasapi.modulos.cliente.dto.ClienteResponse;
 import com.igorbavand.vendasapi.modulos.cliente.filtros.ClienteFiltros;
 import com.igorbavand.vendasapi.modulos.cliente.service.ClienteService;
 import com.igorbavand.vendasapi.modulos.comum.annotations.PageRequestSwaggerParameters;

@@ -22,6 +22,7 @@ import java.lang.reflect.Method;
 @RestControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler
         implements AsyncUncaughtExceptionHandler {
+
     @Override
     public void handleUncaughtException(Throwable throwable, Method method, Object... objects) {
         log.info("Erro async: " + throwable.getMessage());
@@ -53,7 +54,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler
         return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
     }
 
-
     @ExceptionHandler(ServiceUnavailableException.class)
     public final ResponseEntity<ExceptionResponse> handlerServiceUnavailable(
             ServiceUnavailableException ex, WebRequest request) {
@@ -61,7 +61,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler
                 new ExceptionResponse(ex.getMessage(), request.getDescription(false));
         return new ResponseEntity<>(exceptionResponse, HttpStatus.SERVICE_UNAVAILABLE);
     }
-
 
     @ExceptionHandler(MaxUploadSizeExceededException.class)
     public ResponseEntity<ExceptionResponse> handlerMaxUploadSizeExceeded(

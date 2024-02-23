@@ -24,17 +24,22 @@ public class SecurityConfigurations {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
-        String[] permitAll = {"/swagger-ui/**", "/v3/api-docs/**", "/api/auth/login", "/api/auth/register", "/public/**", "/api/venda/webhook-listener"};
+        String[] permitAll = {"/swagger-ui/**",
+            "/v3/api-docs/**",
+            "/api/auth/login",
+            "/api/auth/register",
+            "/public/**",
+            "/api/venda/webhook-listener"};
 
         return httpSecurity
-                .csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(permitAll).permitAll()
-                        .anyRequest().authenticated()
-                )
-                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();
+            .csrf(AbstractHttpConfigurer::disable)
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authorizeHttpRequests(authorize -> authorize
+                .requestMatchers(permitAll).permitAll()
+                .anyRequest().authenticated()
+            )
+            .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+            .build();
     }
 
     @Bean
