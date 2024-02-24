@@ -60,11 +60,15 @@ public class Usuario implements UserDetails {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    public Usuario(String login, String password, EUserRole role) {
+    public Usuario(String nome, String telefone, String cpf, String cidade, String login, String password, EUserRole role) {
+        this.nome = nome;
+        this.telefone = telefone;
+        this.cpf = cpf;
+        this.cidade = cidade;
         this.login = login;
         this.password = password;
         this.role = role;
-        this.createdAt = this.getCreatedAt();
+        this.createdAt = LocalDateTime.now();
         this.updatedAt = this.getUpdatedAt();
     }
 
