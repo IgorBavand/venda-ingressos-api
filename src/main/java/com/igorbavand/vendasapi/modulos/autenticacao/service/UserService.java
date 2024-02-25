@@ -19,7 +19,14 @@ public class UserService {
     public ResponseEntity register(RegisterDto registerDto) {
         validateExistingUser(registerDto.login());
         String encryptedPassword = new BCryptPasswordEncoder().encode(registerDto.password());
-        Usuario newUser = new Usuario(registerDto.login(), encryptedPassword, registerDto.userRole());
+        Usuario newUser = new Usuario(
+                registerDto.nome(),
+                registerDto.telefone(),
+                registerDto.cpf(),
+                registerDto.cidade(),
+                registerDto.login(),
+                encryptedPassword,
+                registerDto.userRole());
         this.repository.save(newUser);
 
         return ResponseEntity.ok().build();
