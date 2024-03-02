@@ -3,6 +3,7 @@ package com.igorbavand.vendasapi.modulos.autenticacao.controller;
 import com.igorbavand.vendasapi.modulos.autenticacao.dto.AuthenticationDto;
 import com.igorbavand.vendasapi.modulos.autenticacao.dto.RegisterDto;
 import com.igorbavand.vendasapi.modulos.autenticacao.dto.TokenResponseDto;
+import com.igorbavand.vendasapi.modulos.autenticacao.dto.UpdateDto;
 import com.igorbavand.vendasapi.modulos.autenticacao.model.Usuario;
 import com.igorbavand.vendasapi.modulos.autenticacao.service.AuthenticationService;
 import com.igorbavand.vendasapi.modulos.autenticacao.service.TokenService;
@@ -33,6 +34,11 @@ public class AuthenticationController {
         var token = tokenService.generateToken((Usuario) auth.getPrincipal());
 
         return ResponseEntity.ok(new TokenResponseDto(token));
+    }
+
+    @PutMapping("update/{id}")
+    public ResponseEntity update(@PathVariable Integer id, @RequestBody @Valid UpdateDto updateDto) {
+        return ResponseEntity.ok(userService.update(id, updateDto));
     }
 
     @PostMapping("register")
